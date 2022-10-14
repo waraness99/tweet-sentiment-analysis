@@ -3,3 +3,7 @@
 venv
 env
 data
+.amlignore
+.amlignore.amltmp
+main.ipynb.amltmp
+.ipynb_aml_checkpoints
