@@ -7,3 +7,4 @@ data
 .amlignore.amltmp
 main.ipynb.amltmp
 .ipynb_aml_checkpoints
+.ipynb_checkpoints
