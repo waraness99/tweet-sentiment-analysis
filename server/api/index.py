@@ -44,9 +44,9 @@ def text_preprocessing(text):
     return text
 
 
-nltk.download('punkt', download_dir='/tmp')
-nltk.download('stopwords', download_dir='/tmp') 
-nltk.download('wordnet', download_dir='/tmp')
+nltk.download('punkt', download_dir='/tmp/')
+nltk.download('stopwords', download_dir='/tmp/') 
+nltk.download('wordnet', download_dir='/tmp/')
 stopwords = nltk.corpus.stopwords.words('english')
 stemmer = nltk.stem.SnowballStemmer('english')
 
