@@ -1,28 +1,22 @@
-from http.server import BaseHTTPRequestHandler
-from urllib import parse
+from flask import Flask, render_template
 import re
 import contractions
 import tensorflow as tf
 
-class handler(BaseHTTPRequestHandler):
+app = Flask(__name__)
 
-	def do_GET(self):
-		s = self.path
-		dic = dict(parse.parse_qsl(parse.urlsplit(s).query))
-		self.send_response(200)
-		self.send_header('Content-type','text/plain')
-		self.end_headers()
-  
-        # if "name" in dic:
-        #     message = "Hello, " + dic["name"] + "!"
-		# else:
-		# 	message = "Hello, stranger!"
+@app.route('/')
+def hello():
+    return predict_sentiment("I hate this movie")
 
-		message = predict_sentiment("I hate this movie")
+@app.route('/test')
+def test():
+    return 'Test'
 
-		self.wfile.write(message.encode())
-		return
-
+@app.route('/result')
+def result():
+   dict = {'phy':50,'che':60,'maths':70}
+   return render_template('result.html', result = dict)
 
 
 def text_preprocessing(text):
@@ -55,5 +49,5 @@ def predict_sentiment(tweet):
     tokenizer = tf.keras.preprocessing.text.Tokenizer()
     tweet_sequence = pad_sequences(tokenizer.texts_to_sequences([tweet]), padding='post', maxlen=30)
     
-    model = tf.keras.models.load_model('model.h5')
+    model = tf.keras.models.load_model('../../model/best_model.h5')
     return model.predict(tweet_sequence).item()

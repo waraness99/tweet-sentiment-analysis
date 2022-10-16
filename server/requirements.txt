@@ -1,0 +1,5 @@
+Flask
+regex
+contractions
+numpy
+tensorflow
