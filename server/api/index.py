@@ -1,7 +1,6 @@
 from http.server import BaseHTTPRequestHandler
 from urllib import parse
 import re
-import string
 import contractions
 
 class handler(BaseHTTPRequestHandler):
@@ -33,7 +32,7 @@ def text_preprocessing(text):
     # replace common contractions by full words
     text = contractions.fix(text)
     # remove punctuation
-    text = text.translate(str.maketrans('', '', string.punctuation))
+    text = re.sub(r'[^\w\s]', '', text)
     #remove special characters
     text = re.sub(r'[^a-zA-Z0-9\s]', '', text)
     # remove numbers
