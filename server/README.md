@@ -39,9 +39,9 @@ python index.py
 To make a request to the server, send a POST request to the following URL:
 
 ```curl
-curl -X POST http://127.0.0.1:5000/
-   -H 'Content-Type: application/json'
-   -d '{"tweet":"I love this api!"}'
+curl --location --request POST 'http://127.0.0.1:5000/' \
+--header 'Content-Type: application/json' \
+--data-raw '{"tweet":"I love this api!"}'
 ```
 
 The server will return a float representing sentiment of the tweet. In the above example, for the tweet is `I love this api!`. The server will return `0.9697214365005493`. The closer the number is to 1, the more positive the tweet is. The closer the number is to 0, the more negative the tweet is.
