@@ -12,10 +12,7 @@ class handler(BaseHTTPRequestHandler):
 		self.send_header('Content-type','text/plain')
 		self.end_headers()
 
-		if "name" in dic:
-			message = "Hello, " + dic["name"] + "!"
-		else:
-			message = text_preprocessing("Hell ! 3 @eeee frèreHHH I'm gonna good")
+		message = len(text_preprocessing("Hell ! 3 @eeee frèreHHH I'm gonna good"))
 
 		self.wfile.write(message.encode())
 		return
