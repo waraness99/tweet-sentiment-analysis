@@ -12,7 +12,7 @@ class handler(BaseHTTPRequestHandler):
 		self.send_header('Content-type','text/plain')
 		self.end_headers()
 
-		message = len(text_preprocessing("Hell ! 3 @eeee frèreHHH I'm gonna good"))
+		message = text_preprocessing("Hell ! 3 @eeee frèreHHH I'm gonna good")
 
 		self.wfile.write(message.encode())
 		return
@@ -37,4 +37,4 @@ def text_preprocessing(text):
     # remove small words
     text = re.sub(r'\b\w{1,2}\b', '', text)
     
-    return text.split()
+    return text
