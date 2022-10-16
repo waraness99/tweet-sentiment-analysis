@@ -2,7 +2,6 @@ from http.server import BaseHTTPRequestHandler
 from urllib import parse
 import re
 import contractions
-import nltk
 
 class handler(BaseHTTPRequestHandler):
 
@@ -16,7 +15,7 @@ class handler(BaseHTTPRequestHandler):
 		if "name" in dic:
 			message = "Hello, " + dic["name"] + "!"
 		else:
-			message = tokenize(text_preprocessing("Hell ! 3 @eeee frèreHHH I'm gonna good"))
+			message = text_preprocessing("Hell ! 3 @eeee frèreHHH I'm gonna good")
 
 		self.wfile.write(message.encode())
 		return
@@ -41,21 +40,4 @@ def text_preprocessing(text):
     # remove small words
     text = re.sub(r'\b\w{1,2}\b', '', text)
     
-    return text
-
-
-nltk.download('punkt', download_dir='/tmp/')
-nltk.download('stopwords', download_dir='/tmp/') 
-nltk.download('wordnet', download_dir='/tmp/')
-stopwords = nltk.corpus.stopwords.words('english')
-stemmer = nltk.stem.SnowballStemmer('english')
-
-def tokenize(text):
-    raw_tokens = nltk.word_tokenize(text)
-    parsed_tokens = []
-
-    for token in raw_tokens:
-        if token not in stopwords:
-            parsed_tokens.append(stemmer.stem(token))
-                
-    return parsed_tokens
+    return text.split()

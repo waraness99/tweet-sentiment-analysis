@@ -1,3 +1,2 @@
 regex==2022.9.13
 contractions==0.1.72
-nltk==3.7
