@@ -1,4 +1,0 @@
-regex==2022.9.13
-contractions==0.1.72
-numpy==1.23.4
-tensorflow==2.10.0
