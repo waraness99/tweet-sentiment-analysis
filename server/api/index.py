@@ -1,6 +1,8 @@
 from http.server import BaseHTTPRequestHandler
 from urllib import parse
 import re
+import string
+import contractions
 
 class handler(BaseHTTPRequestHandler):
 
@@ -14,7 +16,7 @@ class handler(BaseHTTPRequestHandler):
 		if "name" in dic:
 			message = "Hello, " + dic["name"] + "!"
 		else:
-			message = text_preprocessing("Hell ! 3 @eeee frèreHHH")
+			message = text_preprocessing("Hell ! 3 @eeee frèreHHH I'm gonna good")
 
 		self.wfile.write(message.encode())
 		return
@@ -29,10 +31,10 @@ def text_preprocessing(text):
     # remove identifiers (e.g. @user)
     text = re.sub(r'@\S+', '', text)
     # replace common contractions by full words
-    # text = contractions.fix(text)
-    # # remove punctuation
-    # text = text.translate(str.maketrans('', '', string.punctuation))
-    # remove special characters
+    text = contractions.fix(text)
+    # remove punctuation
+    text = text.translate(str.maketrans('', '', string.punctuation))
+    #remove special characters
     text = re.sub(r'[^a-zA-Z0-9\s]', '', text)
     # remove numbers
     text = re.sub(r'\d+', '', text)
