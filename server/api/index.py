@@ -5,13 +5,16 @@ import tensorflow as tf
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def hello():
     return predict_sentiment("I hate this movie")
 
+
 @app.route('/test')
 def test():
     return 'Test'
+
 
 @app.route('/result')
 def result():
