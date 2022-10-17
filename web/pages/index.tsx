@@ -72,13 +72,13 @@ const Home: NextPage = () => {
     setSentimentPrediction(sentiment);
   };
 
-  useEffect(() => {
-    storeBearerToken();
-  }, []);
+  // useEffect(() => {
+  //   storeBearerToken();
+  // }, []);
 
   return (
     <div>
-      <h2>Text</h2>
+      <h2 className="text-twitter">Text</h2>
       <textarea onChange={(e) => setTweetText(e.target.value)} />
       <button onClick={getSentimentFromText}>Predict</button>
 
@@ -92,6 +92,14 @@ const Home: NextPage = () => {
           }
         />
       )}
+      <Tweet
+        tweetId={`${extractTweetIdFromUrl(
+          "https://twitter.com/cctv_idiots/status/1582054983130054656?s=20&t=xxTVlraJOQkAGlkPd724aQ"
+        )}`}
+        renderError={(_err) =>
+          "Could not load tweet! ...Your custom component here"
+        }
+      />
       <button onClick={getSentimentFromTweet}>Get tweet info</button>
 
       <h2>Prediction</h2>
