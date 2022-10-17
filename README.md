@@ -16,7 +16,10 @@ You can find all details inside the model notebook [here](./model/main.ipynb).
 
 ## The server
 
-The server is a simple Flask API that takes a tweet as a parameter and returns the sentiment of the tweet. The server uses the model to classify the tweet. You can find all details inside the server README [here](./server/README.md).
+The server is a simple Flask API that takes a tweet as a parameter and returns the sentiment of the tweet. The server uses the model to classify the tweet.
+It also includes an API to get a tweet by its ID. It uses the Twitter API to get the tweet.
+
+You can find all details inside the server README [here](./server/README.md).
 
 ## The web client
 
