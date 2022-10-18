@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import axios from "axios";
 import { setCookie, getCookie } from "cookies-next";
 import { Tweet } from "react-twitter-widgets";
+import { Wizard } from "../components/wizard";
 
 const Home: NextPage = () => {
   const [tweetUrl, setTweetUrl] = React.useState("");
@@ -78,7 +79,8 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <h2 className="text-twitter">Text</h2>
+      <Wizard />
+      {/* <h2 className="text-twitter">Text</h2>
       <textarea onChange={(e) => setTweetText(e.target.value)} />
       <button onClick={getSentimentFromText}>Predict</button>
 
@@ -103,7 +105,7 @@ const Home: NextPage = () => {
       <button onClick={getSentimentFromTweet}>Get tweet info</button>
 
       <h2>Prediction</h2>
-      <p> {sentimentPrediction ?? "_"}</p>
+      <p> {sentimentPrediction ?? "_"}</p> */}
     </div>
   );
 };
