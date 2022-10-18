@@ -1,50 +1,59 @@
 import { useMachine } from "@xstate/react";
-import { wizardMachine } from "./machine/machine";
-import {
-  EventTypes,
-  InputMethod,
-  WizardFlowStates,
-} from "./machine/machine-types";
-import { InputMethodStep } from "./steps/input-method-step";
-import { PredictionStep } from "./steps/prediction-step";
-import { TextInputStep } from "./steps/text-input-step";
+import { Stack } from "@chakra-ui/react";
+
 import { WelcomeStep } from "./steps/welcome-step";
+import { InputMethodStep } from "./steps/input-method-step";
+import { TextInputStep } from "./steps/text-input-step";
+import { PredictionStep } from "./steps/prediction-step";
+
+import { wizardMachine } from "./machine/machine";
+import { EventTypes, WizardFlowStates } from "./machine/machine-types";
 
 export const Wizard = () => {
   const [state, send] = useMachine(wizardMachine);
+  const { value, context } = state;
 
-  const CurrentStep = () => {
-    switch (state.value) {
-      case WizardFlowStates.Welcome:
-        return <WelcomeStep onSubmit={() => send(EventTypes.Start)} />;
-      case WizardFlowStates.InputMethod:
-        return (
-          <InputMethodStep
-            onSubmit={(value) => send(EventTypes.SetInputMethod, { value })}
-          />
-        );
-      case WizardFlowStates.TextInput:
-        return (
-          <TextInputStep
-            onSubmit={(value) => send(EventTypes.SetText, { value })}
-            inputMethod={state.context.inputMethod as InputMethod}
-          />
-        );
-      case WizardFlowStates.SentimentPrediction:
-        return <PredictionStep onSubmit={() => send(EventTypes.Restart)} />;
-      default:
-        return <div>Error</div>;
-    }
-  };
+  // @ts-ignore
+  const onPrevious = () => send(EventTypes.Prev);
 
   return (
-    <div>
-      {state.value !== WizardFlowStates.Welcome && (
-        <button onClick={() => send(EventTypes.Prev)}>Previous</button>
+    <Stack
+      spacing={{ base: "4", md: "8", lg: "10" }}
+      bg="white"
+      p={{ base: "4", md: "8", lg: "12" }}
+      rounded="xl"
+      maxW="4xl"
+      w="full"
+    >
+      {value === WizardFlowStates.Welcome && (
+        <WelcomeStep
+          // @ts-ignore
+          onSubmit={() => send(EventTypes.Start)}
+        />
       )}
-      <CurrentStep />
-
-      <pre>{JSON.stringify(state.context, null, 2)}</pre>
-    </div>
+      {value === WizardFlowStates.InputMethod && (
+        <InputMethodStep
+          // @ts-ignore
+          onSubmit={(value) => send(EventTypes.SetInputMethod, { value })}
+          onPrevious={onPrevious}
+          context={context}
+        />
+      )}
+      {value === WizardFlowStates.TextInput && (
+        <TextInputStep
+          // @ts-ignore
+          onSubmit={(value) => send(EventTypes.SetText, { value })}
+          onPrevious={onPrevious}
+          context={context}
+        />
+      )}
+      {value === WizardFlowStates.SentimentPrediction && (
+        <PredictionStep
+          // @ts-ignore
+          onSubmit={() => send(EventTypes.Restart)}
+          context={context}
+        />
+      )}
+    </Stack>
   );
 };
