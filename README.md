@@ -1,10 +1,18 @@
 # Tweet Sentiment Analysis
 
+> Check our demo on [Youtube](https://youtu.be/V2fEzAxdhLQ)!
+
 This project aims to classify the sentiment of a tweet as positive or negative. The project is divided into 3 parts:
 
 1. The AI model
 2. A server that uses the model to classify tweets
 3. A web client that sends tweets to the server and displays the sentiment
+
+Here are some screenshots of the web client. You can also check it out on [Youtube](https://youtu.be/V2fEzAxdhLQ)!
+
+![Sentiment Great](./images/sentiment-great.png)
+
+![Sentiment Bad](./images/paste-tweet.png)
 
 ## The AI model
 
